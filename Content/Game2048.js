@@ -12632,7 +12632,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       fn=function()
       {
        e.event.Trigger(null);
-       return true;
+       return false;
       };
       jq.on("click",fn);
       return jq.on(this.eventTouchend,fn);
@@ -12692,24 +12692,24 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          if(matchValue.$==1)
           {
            r.move.event.Trigger(matchValue.$0);
-           return true;
+           return false;
           }
          else
           {
            if(key===82)
             {
              r.restart.event.Trigger(null);
-             return true;
+             return false;
             }
            else
             {
-             return false;
+             return true;
             }
           }
         }
        else
         {
-         return false;
+         return true;
         }
       });
       msPointerEnabled=window.navigator.msPointerEnabled;
@@ -12727,7 +12727,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        var touch;
        if((msPointerEnabled?e.touches.length>1:false)?true:e.targetTouches>1)
         {
-         return false;
+         return true;
         }
        else
         {
@@ -12740,7 +12740,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
            touch=IntrinsicFunctionProxy.GetArray(e.touches,0);
            r.touchStartClient=[touch.clientX,touch.clientY];
           }
-         return true;
+         return false;
         }
       });
       gameContainer.on(eventTouchmove,function()
@@ -12752,7 +12752,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        var touchEndClient,changedTouch,dx,absDx,dy,absDy;
        if((msPointerEnabled?e.touches.length>0:false)?true:e.targetTouches>0)
         {
-         return false;
+         return true;
         }
        else
         {
@@ -12780,11 +12780,11 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
            }:{
             $:0
            });
-           return true;
+           return false;
           }
          else
           {
-           return false;
+           return true;
           }
         }
       });
