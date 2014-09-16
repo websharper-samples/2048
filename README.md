@@ -1,4 +1,4 @@
-2048
+2048 [![Build status](https://ci.appveyor.com/api/projects/status/dloyv4km6fqws269/branch/master)](https://ci.appveyor.com/project/Jand42/2048/branch/master)
 ====
 
 2048 game reimplemented with F# and WebSharper
