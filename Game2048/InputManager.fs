@@ -106,7 +106,8 @@ module InputManager =
                         else
                             if dy > 0 then Down else Up 
                         |> move.Trigger
-                    false
+                        true
+                    else false
             )
 
         member this.Move = move.Publish
