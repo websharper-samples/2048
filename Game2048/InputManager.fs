@@ -38,13 +38,13 @@ module InputManager =
                     match map |> Map.tryFind key with
                     | Some dir -> 
                         move.Trigger dir
-                        true
+                        false
                     | _ ->
                     if key = 82 then
                         restart.Trigger()
-                        true
-                    else false
-                else false
+                        false
+                    else true
+                else true
             )
         
         let msPointerEnabled = Html5.Window.Self.Navigator?msPointerEnabled
@@ -56,7 +56,7 @@ module InputManager =
                 "touchstart", "touchmove", "touchend"
 
         let bindButtonPress (e: Event<_>) (jq: JQuery) =
-            let fn (_: obj) = e.Trigger(); true
+            let fn (_: obj) = e.Trigger(); false
             jq.On("click", fn)
             jq.On(eventTouchend, fn)
 
@@ -71,21 +71,21 @@ module InputManager =
         do  gameContainer.On(eventTouchstart, fun e ->
                 let e = e :?> Dom.Event
                 if (msPointerEnabled && e?touches?length > 1) || e?targetTouches > 1 
-                then false // Ignore if touching with more than 1 finger
+                then true // Ignore if touching with more than 1 finger
                 else 
                     if msPointerEnabled then
                         touchStartClient <- e?pageX, e?pageY
                     else
                         let touch = (e?touches: _[]).[0]
                         touchStartClient <- touch?clientX, touch?clientY
-                    true    
+                    false    
             )
 
             gameContainer.On(eventTouchmove, fun e -> true)
 
             gameContainer.On(eventTouchend, fun e ->
                 if (msPointerEnabled && e?touches?length > 0) || e?targetTouches > 0
-                then false // Ignore if still touching with one or more fingers
+                then true // Ignore if still touching with one or more fingers
                 else
                     let touchEndClient =
                         if msPointerEnabled then 
@@ -106,8 +106,8 @@ module InputManager =
                         else
                             if dy > 0 then Down else Up 
                         |> move.Trigger
-                        true
-                    else false
+                        false
+                    else true
             )
 
         member this.Move = move.Publish
