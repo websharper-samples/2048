@@ -1,0 +1,9 @@
+*.suo
+Site/Content/
+*/Content/WebSharper/
+*/Scripts/WebSharper/
+*/bin/
+*/obj/
+build/
+packages/
+tools/packages/
