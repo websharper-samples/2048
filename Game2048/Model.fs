@@ -1,6 +1,7 @@
 namespace Game2048
 
 open IntelliFactory.WebSharper
+open IntelliFactory.WebSharper.JavaScript
 
 [<JavaScript>]
 module Model =
@@ -55,7 +56,7 @@ module Model =
     let addRandomTile grid value =
         let empty = ResizeArray()
         grid |> Array2D.iteri (fun i j c -> if Option.isNone c then empty.Add(i, j))
-        let i, j = empty.[int (EcmaScript.Math.Random() * float empty.Count)]
+        let i, j = empty.[int (Math.Random() * float empty.Count)]
         grid.[i, j] <- Some (newTile (i + 1, j + 1) value)  
 
     let gridContains grid value =

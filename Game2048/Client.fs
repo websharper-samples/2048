@@ -1,8 +1,9 @@
 namespace Game2048
 
 open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html
+open IntelliFactory.WebSharper.Html.Client
 open IntelliFactory.WebSharper.JQuery
+open IntelliFactory.WebSharper.JavaScript
 
 open Model
 open InputManager
@@ -57,7 +58,7 @@ module Client =
                 if tile.Value > 2048 then classes.Add "tile-super" 
                 applyClasses wrapper classes
                         
-                tileContainer.Append(wrapper.Body) |> ignore
+                tileContainer.Append(wrapper.Dom) |> ignore
 
                 match moveTo with
                 | Some pos -> 
@@ -85,12 +86,12 @@ module Client =
             scoreContainer.Text(string score) |> ignore
             if diff > 0 then
                 let addition = Div [ Attr.Class "score-addition"; Text ("+" + string diff) ]
-                scoreContainer.Append(addition.Body) |> ignore
+                scoreContainer.Append(addition.Dom) |> ignore
 
             bestContainer.Text(string state.BestScore) |> ignore
 
-            let message (cls: string) text = 
-                JavaScript.Log text
+            let message (cls: string) (text : string) = 
+                Console.Log text
                 messageContainer.AddClass(cls) |> ignore
                 messageContainer.Find("p").First().Text(text) |> ignore
             
@@ -113,7 +114,7 @@ module Client =
         let len1 = Array2D.length1 grid
         let len2 = Array2D.length2 grid
         let newGrid = Array2D.zeroCreate len1 len2
-        JavaScript.Log "moveGrid"
+        Console.Log "moveGrid"
 
         match dir with
         | Up ->
@@ -173,7 +174,7 @@ module Client =
                 Div [ Attr.Class "grid-row" ] -< Array.init gridSize (fun _ ->
                     Div [ Attr.Class "grid-cell" ]
                 )
-            gridContainer.Append(gridRow.Body) |> ignore
+            gridContainer.Append(gridRow.Dom) |> ignore
 
         let storedGame = ref Unchecked.defaultof<IStorageItem<StoredGame>>
 

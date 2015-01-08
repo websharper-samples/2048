@@ -3,6 +3,7 @@
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.Html
 open IntelliFactory.WebSharper.JQuery
+open IntelliFactory.WebSharper.JavaScript
 
 [<JavaScript>]
 module InputManager =
@@ -30,7 +31,7 @@ module InputManager =
                 65, Left  // A
             ]
         
-        do  JQuery.Of(Dom.Document.Current).On("keydown", fun e ->
+        do  JQuery.Of(JS.Document).On("keydown", fun e ->
                 let e = e :?> Dom.KeyboardEvent
                 let modifiers = e.AltKey || e.CtrlKey || e.MetaKey || e.ShiftKey
                 let key = e?which
@@ -47,7 +48,7 @@ module InputManager =
                 else true
             )
         
-        let msPointerEnabled = Html5.Window.Self.Navigator?msPointerEnabled
+        let msPointerEnabled = JS.Window.Navigator?msPointerEnabled
 
         let eventTouchstart, eventTouchmove, eventTouchend =
             if msPointerEnabled then

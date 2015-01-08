@@ -1,15 +1,15 @@
 namespace Game2048
 
 open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html
+open IntelliFactory.WebSharper.Html.Client
 open IntelliFactory.WebSharper.JQuery
+open IntelliFactory.WebSharper.JavaScript
 
 // Helper for handling localstorage, making a stored value work like a ref cell.
 [<JavaScript; AutoOpen>]
 module LocalStorage =
-    open IntelliFactory.WebSharper.Html5
         
-    let localStorage = Window.Self.LocalStorage
+    let localStorage = JS.Window.LocalStorage
 
     type IValue<'T> = 
         abstract Value: 'T with get, set
@@ -54,11 +54,11 @@ module LocalStorage =
                 and  set v =
                     try localStorage.SetItem(key, Json.Stringify v)  
                         value <- Some v 
-                    with _ -> JavaScript.Alert "Saving data to storage failed."
+                    with _ -> JS.Alert "Saving data to storage failed."
 
             member this.Save() = 
                 try localStorage.SetItem(key, Json.Stringify (getValue()))  
-                with _ -> JavaScript.Alert "Saving data to storage failed."
+                with _ -> JS.Alert "Saving data to storage failed."
 
             member this.Delete() =
                 localStorage.RemoveItem key

@@ -1,6 +1,7 @@
 namespace Game2048
 
 open IntelliFactory.WebSharper
+open IntelliFactory.WebSharper.JavaScript
 
 open Model
 
@@ -24,7 +25,7 @@ module Variants =
         override this.Goal grid = gridContains grid this.GoalValue
 
         override this.NewTileValue() =
-            if EcmaScript.Math.Random() < 0.9 then 2 else 4
+            if Math.Random() < 0.9 then 2 else 4
                 
         override this.Next grid =
             this.NewTileValue() |> addRandomTile grid 
@@ -53,7 +54,7 @@ module Variants =
         override this.GoalValue = 2584
         
         override this.NewTileValue() =
-            if EcmaScript.Math.Random() < 0.9 then 1 else 2         
+            if Math.Random() < 0.9 then 1 else 2         
         
     type PlusMinusRules() =
         inherit OriginalRules()
@@ -71,8 +72,8 @@ module Variants =
             else None 
 
         override this.NewTileValue() =
-            if EcmaScript.Math.Random() < 0.9 then 2 else 4
-            * if EcmaScript.Math.Random() < 0.5 then 1 else -1
+            if Math.Random() < 0.9 then 2 else 4
+            * if Math.Random() < 0.5 then 1 else -1
 
         override this.GoalValue = 2584
 
