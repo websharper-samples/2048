@@ -1,7 +1,7 @@
 namespace Game2048
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.JavaScript
+open WebSharper
+open WebSharper.JavaScript
 
 open Model
 

@@ -1,9 +1,9 @@
 ﻿namespace Game2048
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html
-open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.JavaScript
+open WebSharper
+open WebSharper.Html
+open WebSharper.JQuery
+open WebSharper.JavaScript
 
 [<JavaScript>]
 module InputManager =
@@ -31,22 +31,20 @@ module InputManager =
                 65, Left  // A
             ]
         
-        do  JQuery.Of(JS.Document).On("keydown", fun e ->
-                let e = e :?> Dom.KeyboardEvent
+        do  JQuery.Of(JS.Document).On("keydown", fun _ ev ->
+                let e = ev.AsDomEvent :?> Dom.KeyboardEvent
                 let modifiers = e.AltKey || e.CtrlKey || e.MetaKey || e.ShiftKey
                 let key = e?which
                 if not modifiers then
                     match map |> Map.tryFind key with
                     | Some dir -> 
                         move.Trigger dir
-                        false
+                        ev.StopPropagation()
                     | _ ->
                     if key = 82 then
                         restart.Trigger()
-                        false
-                    else true
-                else true
-            )
+                        ev.StopPropagation()
+            ).Ignore
         
         let msPointerEnabled = JS.Window.Navigator?msPointerEnabled
 
@@ -57,9 +55,9 @@ module InputManager =
                 "touchstart", "touchmove", "touchend"
 
         let bindButtonPress (e: Event<_>) (jq: JQuery) =
-            let fn (_: obj) = e.Trigger(); false
+            let fn (_: Dom.Element) (ee: Event) = e.Trigger(); ee.StopPropagation()
             jq.On("click", fn)
-            jq.On(eventTouchend, fn)
+                .On(eventTouchend, fn).Ignore
 
         do  JQuery.Of ".retry-button" |> bindButtonPress restart
             JQuery.Of ".restart-button" |> bindButtonPress restart
@@ -69,30 +67,29 @@ module InputManager =
 
         let mutable touchStartClient = 0, 0
 
-        do  gameContainer.On(eventTouchstart, fun e ->
-                let e = e :?> Dom.Event
-                if (msPointerEnabled && e?touches?length > 1) || e?targetTouches > 1 
-                then true // Ignore if touching with more than 1 finger
+        do  gameContainer.On(eventTouchstart, fun ee ev ->
+                if (msPointerEnabled && ev?touches?length > 1) || ev?targetTouches > 1 
+                then () // Ignore if touching with more than 1 finger
                 else 
                     if msPointerEnabled then
-                        touchStartClient <- e?pageX, e?pageY
+                        touchStartClient <- ev.PageX, ev.PageY
                     else
-                        let touch = (e?touches: _[]).[0]
+                        let touch = (ev?touches: _[]).[0]
                         touchStartClient <- touch?clientX, touch?clientY
-                    false    
-            )
+                    ev.StopPropagation()   
+            ).Ignore
 
-            gameContainer.On(eventTouchmove, fun e -> true)
+            //gameContainer.On(eventTouchmove, fun e -> true)
 
-            gameContainer.On(eventTouchend, fun e ->
-                if (msPointerEnabled && e?touches?length > 0) || e?targetTouches > 0
-                then true // Ignore if still touching with one or more fingers
+            gameContainer.On(eventTouchend, fun ee ev ->
+                if (msPointerEnabled && ev?touches?length > 0) || ev?targetTouches > 0
+                then () // Ignore if still touching with one or more fingers
                 else
                     let touchEndClient =
                         if msPointerEnabled then 
-                            e?pageX, e?pageY
+                            ev?pageX, ev?pageY
                         else
-                            let changedTouch = (e?changedTouches: _[]).[0]
+                            let changedTouch = (ev?changedTouches: _[]).[0]
                             changedTouch?clientX, changedTouch?clientY
                     
                     let dx = fst touchEndClient - fst touchStartClient
@@ -107,9 +104,8 @@ module InputManager =
                         else
                             if dy > 0 then Down else Up 
                         |> move.Trigger
-                        false
-                    else true
-            )
+                        ev.StopPropagation()
+            ).Ignore
 
         member this.Move = move.Publish
         member this.Restart = restart.Publish

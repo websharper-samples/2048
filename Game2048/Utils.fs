@@ -1,9 +1,9 @@
 namespace Game2048
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html.Client
-open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.JavaScript
+open WebSharper
+open WebSharper.Html.Client
+open WebSharper.JQuery
+open WebSharper.JavaScript
 
 // Helper for handling localstorage, making a stored value work like a ref cell.
 [<JavaScript; AutoOpen>]
@@ -96,7 +96,7 @@ module Array2D =
 module Array =
     [<Inline>]
     let push (array: 'T[]) (item: 'T) =
-        array.ToEcma().Push(item) |> ignore
+        array.JS.Push(item) |> ignore
 
     let pad length (array: 'T[]) =
         let res = array |> Array.map Some

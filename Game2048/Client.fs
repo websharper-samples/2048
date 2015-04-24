@@ -1,9 +1,9 @@
 namespace Game2048
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html.Client
-open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.JavaScript
+open WebSharper
+open WebSharper.Html.Client
+open WebSharper.JQuery
+open WebSharper.JavaScript
 
 open Model
 open InputManager
@@ -243,13 +243,12 @@ module Client =
             continueGame()
             actuate false false
 
-        selectGameType.On("change", fun _ ->
+        selectGameType.On("change", fun _ _ ->
             let v = selectGameType.Val() :?> string
             for r in Variants.All do
                 if v = r.Name then setRules r
                 selectGameType.Blur().Ignore
-            true
-        )
+        ).Ignore
 
         inputManager.Move.Add <| fun dir ->
             let rules = !rules
