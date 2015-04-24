@@ -79,8 +79,6 @@ module InputManager =
                     ev.StopPropagation()   
             ).Ignore
 
-            //gameContainer.On(eventTouchmove, fun e -> true)
-
             gameContainer.On(eventTouchend, fun ee ev ->
                 if (msPointerEnabled && ev?touches?length > 0) || ev?targetTouches > 0
                 then () // Ignore if still touching with one or more fingers
