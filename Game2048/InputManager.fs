@@ -32,18 +32,17 @@ module InputManager =
             ]
         
         do  JQuery.Of(JS.Document).On("keydown", fun _ ev ->
-                let e = ev.AsDomEvent :?> Dom.KeyboardEvent
-                let modifiers = e.AltKey || e.CtrlKey || e.MetaKey || e.ShiftKey
-                let key = e?which
+                let modifiers = ev.AltKey || ev.CtrlKey || ev.MetaKey || ev.ShiftKey
+                let key = ev.Which
                 if not modifiers then
                     match map |> Map.tryFind key with
                     | Some dir -> 
                         move.Trigger dir
-                        ev.StopPropagation()
+                        ev.PreventDefault()
                     | _ ->
                     if key = 82 then
                         restart.Trigger()
-                        ev.StopPropagation()
+                        ev.PreventDefault()
             ).Ignore
         
         let msPointerEnabled = JS.Window.Navigator?msPointerEnabled
@@ -55,7 +54,7 @@ module InputManager =
                 "touchstart", "touchmove", "touchend"
 
         let bindButtonPress (e: Event<_>) (jq: JQuery) =
-            let fn (_: Dom.Element) (ee: Event) = e.Trigger(); ee.StopPropagation()
+            let fn (_: Dom.Element) (ee: Event) = e.Trigger(); ee.PreventDefault()
             jq.On("click", fn)
                 .On(eventTouchend, fn).Ignore
 
@@ -76,7 +75,7 @@ module InputManager =
                     else
                         let touch = (ev?touches: _[]).[0]
                         touchStartClient <- touch?clientX, touch?clientY
-                    ev.StopPropagation()   
+                    ev.PreventDefault()   
             ).Ignore
 
             gameContainer.On(eventTouchend, fun ee ev ->
@@ -85,7 +84,7 @@ module InputManager =
                 else
                     let touchEndClient =
                         if msPointerEnabled then 
-                            ev?pageX, ev?pageY
+                            ev.PageX, ev.PageY
                         else
                             let changedTouch = (ev?changedTouches: _[]).[0]
                             changedTouch?clientX, changedTouch?clientY
@@ -102,7 +101,7 @@ module InputManager =
                         else
                             if dy > 0 then Down else Up 
                         |> move.Trigger
-                        ev.StopPropagation()
+                        ev.PreventDefault()
             ).Ignore
 
         member this.Move = move.Publish
