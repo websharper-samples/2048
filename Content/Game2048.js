@@ -9867,7 +9867,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       fn=function(ee)
       {
        e.event.Trigger(null);
-       return ee.stopPropagation();
+       return ee.preventDefault();
       };
       return jq.on("click",fn).on(this.eventTouchend,fn);
      },
@@ -9926,14 +9926,14 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          if(matchValue.$==1)
           {
            r.move.event.Trigger(matchValue.$0);
-           return ev.stopPropagation();
+           return ev.preventDefault();
           }
          else
           {
            if(key===82)
             {
              r.restart.event.Trigger(null);
-             return ev.stopPropagation();
+             return ev.preventDefault();
             }
            else
             {
@@ -9974,7 +9974,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
            touch=Arrays.get(ev.touches,0);
            r.touchStartClient=[touch.clientX,touch.clientY];
           }
-         return ev.stopPropagation();
+         return ev.preventDefault();
         }
       });
       gameContainer.on(r.eventTouchend,function(ev)
@@ -10010,7 +10010,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
            }:{
             $:0
            });
-           return ev.stopPropagation();
+           return ev.preventDefault();
           }
          else
           {
