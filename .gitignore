@@ -8,3 +8,4 @@ build/
 packages/
 tools/packages/
 Game2048/Content
+.paket/paket.exe
