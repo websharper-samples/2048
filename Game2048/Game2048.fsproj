@@ -171,5 +171,6 @@
     </Reference>
   </ItemGroup>
   <Import Project="..\packages\FSharp.Compiler.Tools\tools\Microsoft.FSharp.targets" Condition="Exists('..\packages\FSharp.Compiler.Tools\tools\Microsoft.FSharp.targets')" />
+  <Import Project="..\.paket\paket.targets" Condition="Exists('..\.paket\paket.targets')" />
   <Import Project="..\packages\WebSharper\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper\build\WebSharper.targets')" Label="Paket" />
 </Project>
