@@ -10,4 +10,4 @@ if not exist .paket\paket.exe (
 
 %MSBUILD_PATH% /p:Configuration=Release
 
-xcopy /y Game2048 %DEPLOYMENT_TARGET%
+xcopy /y /e Game2048 %DEPLOYMENT_TARGET%
