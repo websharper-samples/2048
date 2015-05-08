@@ -1,5 +1,10 @@
-@echo off
+@ECHO OFF
+
 setlocal
-set PATH=%PATH%;%ProgramFiles(x86)%\MSBuild\12.0\Bin
-powershell tools/restore-packages.ps1
-MSBuild.exe /p:Configuration=Release /verbosity:minimal
+set FSharpHome=tools\packages\FSharp.Compiler.Tools\tools
+set PATH=
+set PATH=%PATH%;tools\NuGet
+set PATH=%PATH%;%FSharpHome%
+nuget install IntelliFactory.Build -nocache -pre -ExcludeVersion -o tools\packages
+nuget install FSharp.Compiler.Tools -nocache -pre -ExcludeVersion -o tools\packages
+fsi.exe --exec build.fsx %*
