@@ -6,6 +6,7 @@ let bt =
         .PackageId("2048", "1.0-alpha")
         .WithFramework(fun fw -> fw.Net40)
         .WithFSharpVersion(FSharpVersion.FSharp31)
+        .Verbose()
 
 let Game2048 =
     bt.WebSharper.BundleWebsite("Game2048")
