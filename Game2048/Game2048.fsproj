@@ -95,6 +95,10 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core">
+      <HintPath>..\packages\FSharp.Compiler.Tools\tools\FSharp.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IntelliFactory.Xml">
       <HintPath>..\packages\WebSharper\lib\net40\IntelliFactory.Xml.dll</HintPath>
       <Private>True</Private>
