@@ -1,8 +1,7 @@
 @ECHO OFF
 
 setlocal
-set FSharpHome=tools\packages\FSharp.Compiler.Tools\tools
-set PATH=
+set FSharpHome=%CD%\tools\packages\FSharp.Compiler.Tools\tools
 set PATH=%PATH%;tools\NuGet
 set PATH=%PATH%;%FSharpHome%
 nuget install IntelliFactory.Build -nocache -pre -ExcludeVersion -o tools\packages
