@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Game2048", "../Game2048/Game2048.fsproj", "{A8782E82-523C-4F03-937F-A540CA18A180}" 
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Game2048", "Game2048/Game2048.fsproj", "{A8782E82-523C-4F03-937F-A540CA18A180}" 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
