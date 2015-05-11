@@ -1,7 +1,7 @@
 @ECHO OFF
 setlocal
 
-echo "====== Restoring packages... ======"
+echo ====== Restoring packages... ======
 
 if not exist .paket\paket.exe (
   .paket\paket.bootstrapper.exe
@@ -10,13 +10,13 @@ if not exist .paket\paket.exe (
 .paket\paket.exe restore
 
 if not %ERRORLEVEL% == 0 (
-  echo "====== Failed to restore packages. ======"
+  echo ====== Failed to restore packages. ======
   exit 1
 )
 
 
 
-echo "====== Building... ======"
+echo ====== Building... ======
 
 REM Azure provides MSBUILD_PATH and DEPLOYMENT_TARGET.
 REM If we're not deploying to Azure (eg. building locally),
@@ -28,7 +28,7 @@ if "%MSBUILD_PATH%" == "" (
 %MSBUILD_PATH% /p:Configuration=Release
 
 if not %ERRORLEVEL% == 0 (
-  echo "====== Build failed. ======"
+  echo ====== Build failed. ======
   exit 1
 )
 
@@ -53,11 +53,12 @@ REM     if not "%DEPLOYMENT_TARGET%" == "" (
 REM         xcopy /y /e Game2048 "%DEPLOYMENT_TARGET%"
 REM     )
 if not "%DEPLOYMENT_TARGET%" == "" (
-  echo "====== Deploying... ======"
+  echo ====== Deploying... ======
   copy Game2048\*html %DEPLOYMENT_TARGET%
   mkdir "%DEPLOYMENT_TARGET%\Content"
   xcopy /y /e Game2048\Content "%DEPLOYMENT_TARGET%\Content"
   mkdir "%DEPLOYMENT_TARGET%\style"
   xcopy /y /e Game2048\style "%DEPLOYMENT_TARGET%\style"
-  echo "====== Done. ======"
 )
+
+echo ====== Done. ======
