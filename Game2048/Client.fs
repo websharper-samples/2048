@@ -159,7 +159,8 @@ module Client =
             BestScore   : int
         }
 
-    let Main =
+    [<SPAEntryPoint>]
+    let Main() =
         let selectGameType = JQuery.Of ".select-gametype"
                 
         for v in Variants.All do

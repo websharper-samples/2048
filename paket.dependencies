@@ -1,4 +1,7 @@
 source https://nuget.org/api/v2
+source https://daily.websharper.com/nuget
 
 nuget FSharp.Compiler.Tools
 nuget WebSharper
+nuget WebSharper.FSharp
+nuget WebSharper.Html
