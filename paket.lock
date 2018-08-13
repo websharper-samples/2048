@@ -1,7 +1,7 @@
 RESTRICTION: == net461
 NUGET
   remote: https://www.nuget.org/api/v2
-    FSharp.Compiler.Tools (10.0.2)
+    FSharp.Core (4.5.2)
     HtmlAgilityPack (1.8.6)
     System.Xml.XDocument (4.3)
   remote: https://daily.websharper.com/nuget

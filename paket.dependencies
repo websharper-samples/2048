@@ -3,7 +3,7 @@ source https://nuget.org/api/v2
 
 framework: net461
 
-nuget FSharp.Compiler.Tools
 nuget WebSharper
 nuget WebSharper.FSharp
 nuget WebSharper.UI
+nuget FSharp.Core
