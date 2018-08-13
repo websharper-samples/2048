@@ -1,9 +1,11 @@
 namespace Game2048
 
 open WebSharper
-open WebSharper.Html.Client
 open WebSharper.JQuery
 open WebSharper.JavaScript
+open WebSharper.UI
+open WebSharper.UI.Html
+open WebSharper.UI.Client
 
 open Model
 open InputManager
@@ -37,15 +39,11 @@ module Client =
 
             let positionClass (x, y) = "tile-position-" + string x + "-" + string y
             
-            let applyClasses (el: Element) classes =
+            let applyClasses (el: Elt) classes =
                 el.SetAttribute("class", classes |> String.concat " ")
 
             let addTile moveTo addClass (tile: TileData) =
-                let inner = 
-                    Div [ 
-                        Attr.Class "tile-inner" 
-                        Text (string tile.Value)
-                    ]
+                let inner = div [attr.``class`` "tile-inner"] [text (string tile.Value)]
                 let classes =
                     ResizeArray (
                         [
@@ -54,7 +52,7 @@ module Client =
                             positionClass tile.Pos
                         ] @ addClass
                     )
-                let wrapper = Div [ inner ]
+                let wrapper = Elt.div [] [ inner ]
                 if tile.Value > 2048 then classes.Add "tile-super" 
                 applyClasses wrapper classes
                         
@@ -85,7 +83,7 @@ module Client =
             score <- state.Score
             scoreContainer.Text(string score) |> ignore
             if diff > 0 then
-                let addition = Div [ Attr.Class "score-addition"; Text ("+" + string diff) ]
+                let addition = Elt.div [attr.``class`` "score-addition"] [text ("+" + string diff)]
                 scoreContainer.Append(addition.Dom) |> ignore
 
             bestContainer.Text(string state.BestScore) |> ignore
@@ -172,8 +170,8 @@ module Client =
 
         for i in 1 .. gridSize do
             let gridRow =
-                Div [ Attr.Class "grid-row" ] -< Array.init gridSize (fun _ ->
-                    Div [ Attr.Class "grid-cell" ]
+                Elt.div [attr.``class`` "grid-row"] <| Array.init gridSize (fun _ ->
+                    div [attr.``class`` "grid-cell"] []
                 )
             gridContainer.Append(gridRow.Dom) |> ignore
 

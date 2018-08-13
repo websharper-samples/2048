@@ -1,7 +1,9 @@
-source https://nuget.org/api/v2
 source https://daily.websharper.com/nuget
+source https://nuget.org/api/v2
+
+framework: net461
 
 nuget FSharp.Compiler.Tools
 nuget WebSharper
 nuget WebSharper.FSharp
-nuget WebSharper.Html
+nuget WebSharper.UI

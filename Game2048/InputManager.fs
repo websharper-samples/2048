@@ -1,7 +1,6 @@
 ﻿namespace Game2048
 
 open WebSharper
-open WebSharper.Html
 open WebSharper.JQuery
 open WebSharper.JavaScript
 

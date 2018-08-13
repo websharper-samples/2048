@@ -1,10 +1,14 @@
+RESTRICTION: == net461
 NUGET
   remote: https://www.nuget.org/api/v2
     FSharp.Compiler.Tools (10.0.2)
-    IntelliFactory.Xml (0.6.64.1)
+    HtmlAgilityPack (1.8.6)
+    System.Xml.XDocument (4.3)
+  remote: https://daily.websharper.com/nuget
     WebSharper (4.5.0.290)
     WebSharper.FSharp (4.5.0.290)
       WebSharper (4.5.0.290)
-    WebSharper.Html (4.5.0.142)
-      IntelliFactory.Xml (>= 0.6.64 < 0.7)
+    WebSharper.UI (4.5.0.140)
+      HtmlAgilityPack (>= 1.7.1)
+      System.Xml.XDocument (>= 4.3)
       WebSharper (>= 4.5 < 4.6)
