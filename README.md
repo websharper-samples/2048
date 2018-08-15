@@ -5,4 +5,4 @@
 
 [Clone this in CloudSharper](http://cloudsharper.com/clone/JankoA/6d50e34f-c0f0-4d7e-9b75-3a40f60d12e0/2048)
 
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)

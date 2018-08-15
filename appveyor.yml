@@ -17,4 +17,4 @@ on_success:
 
 environment:
   GH_TOKEN:
-    secure: SGKxAHh17EylZMuifTyQc5kref7CkpsScvoO/349PKC+Mzckymlyp/lXT+ZhGtAS
+    secure: d3hIUMAqM1dTwnury5PzdZ/yrinP7QRmv4Uqx82i8RYLlwJV+L3gaUTaislQPmhb
