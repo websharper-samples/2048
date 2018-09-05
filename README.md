@@ -3,7 +3,7 @@
 
 2048 game reimplemented with F# and WebSharper
 
-[See it running](https://intellifactory.github.io/2048/)
+[See it running](https://websharper-samples.github.io/2048/)
 
 [Clone this in CloudSharper](http://cloudsharper.com/clone/JankoA/6d50e34f-c0f0-4d7e-9b75-3a40f60d12e0/2048)
 
